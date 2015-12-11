@@ -5,15 +5,16 @@ Directive for text input autocomplete for Ionic framework
 
 ### Usage
 
-Add the the attribute 'ionic-autocomplete' with passing an object that contains the items and a callback function for handling the select event to the input
+Add the the attribute 'ionic-autocomplete' with passing an object that contains the items and a callback function for handling the select event to the input.
+Add a list to show the items selected if needed.
 
 ```html
 <input type="text" ng-model="search" ng-change="changing()" ionic-autocomplete="{items: types, onSelect: setTypes}" placeholder="Type">
 <ul class="list">
   <li class="item" ng-repeat="type in typesSelected">
-	  {{ type.display }}
-		<i class="icon ion-ios-close" ng-click="removeTypes(type)"></i>
-	</li>
+	{{ type.display }}
+	<i class="icon ion-ios-close" ng-click="removeTypes(type)"></i>
+  </li>
 </ul>
 ```
 the callback is called when the user select an item from the autocomplete list
