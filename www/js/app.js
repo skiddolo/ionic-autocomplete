@@ -20,19 +20,36 @@ angular.module('starter', ['ionic', 'autocomplete.directive'])
     });
 })
 
-.controller('MainCtrl', function ($scope) {
-    $scope.items = [
-        {display: 'Hello'},
-        {display: 'Baha'},
-        {display: 'Ala'},
-        {display: 'Siwar'},
-        {display: 'Monira'},
-        {display: 'Samir'},
-        {display: 'Spange Bob'},
-        {display: 'Deneris Targariant'},
-        {display: 'Ned Stark'}
-    ];
-    $scope.onSelect = function (item) {
-        console.log('item', item);
-    };
+.controller('MainCtrl', function ($scope, autocompleteModel) {
+    
+  	$scope.typesSelected = [];
+  	$scope.types = [{
+		  id: 1,
+		  display: 'Wearing'
+	  	},{
+		  id: 2,
+		  display: 'Food'
+	  	},{
+		  id: 3,
+		  display: 'Sports'
+	  	},{
+		  id: 4,
+		  display: 'Service'
+	  	},{
+		  id: 5,
+		  display: 'Accessories'
+  	}];
+
+    $scope.setTypes = function(item) {
+		$scope.typesSelected.push(item);
+    }
+
+    $scope.removeTypes = function(item) {
+
+		autocompleteModel.getIndexById($scope.typesSelected, item.id).then(function(index){
+			$scope.types.push($scope.typesSelected[index]);
+            $scope.typesSelected.splice(index, 1);
+        })
+
+    }
 });
